@@ -1,0 +1,14 @@
+[Unit]
+Description=Keep CPU usage above the OCI Always Free idle threshold
+After=network.target
+
+[Service]
+ExecStart=/opt/oci-idle-avoidance/load_controller.sh
+Restart=always
+RestartSec=10
+DynamicUser=yes
+# A memory holder killed by the OOM killer must not stop the whole service
+OOMPolicy=continue
+
+[Install]
+WantedBy=multi-user.target
